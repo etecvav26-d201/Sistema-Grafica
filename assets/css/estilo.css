@@ -1,0 +1,222 @@
+/* Gráfica Escolar – estilo base (Etapa 1)
+   As cores vêm das tintas de impressão: ciano, magenta, amarelo e preto. */
+
+:root {
+    --tinta: #1e2430;
+    --papel: #f5f6f8;
+    --branco: #ffffff;
+    --ciano: #0a78b5;
+    --ciano-escuro: #075d8c;
+    --magenta: #c2185b;
+    --verde: #1b7f4b;
+    --amarelo: #f2b705;
+    --borda: #d9dde3;
+    --texto-suave: #5b6472;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--tinta);
+    background: var(--papel);
+}
+
+a { color: var(--ciano); }
+
+:focus-visible {
+    outline: 3px solid var(--ciano-escuro);
+    outline-offset: 2px;
+}
+
+/* Faixa das quatro cores no alto da página */
+.faixa-cmyk {
+    height: 6px;
+    background: linear-gradient(90deg, #00a0dc 0 25%, #e4007c 25% 50%, #ffd500 50% 75%, #000000 75% 100%);
+}
+
+/* ---------- Topo e menu (celular primeiro) ---------- */
+.topo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--tinta);
+    color: var(--branco);
+}
+.topo :focus-visible { outline-color: var(--amarelo); }
+
+.marca {
+    color: var(--branco);
+    font-size: 1.125rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.botao-menu {
+    min-height: 44px;
+    padding: 0.5rem 0.875rem;
+    font: inherit;
+    color: var(--branco);
+    background: transparent;
+    border: 1px solid #5b6472;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+}
+.menu.aberto { display: flex; }
+
+.menu a,
+.menu .em-breve {
+    display: block;
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid #2f3747;
+    text-decoration: none;
+}
+.menu a { color: #dfe4ec; }
+.menu a:hover,
+.menu a.ativo { color: var(--branco); }
+.menu a.ativo { font-weight: 600; }
+.menu .em-breve { color: #8b95a5; }
+
+/* ---------- Conteúdo ---------- */
+.conteudo {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1.25rem 1rem 2rem;
+}
+
+h1 { margin: 0 0 1rem; font-size: 1.5rem; }
+h2 { margin: 0 0 0.75rem; font-size: 1.2rem; }
+
+.cartao {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+}
+
+/* ---------- Avisos (sempre com texto, não só cor) ---------- */
+.aviso {
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-left: 5px solid var(--borda);
+    border-radius: 6px;
+}
+.aviso-sucesso { border-left-color: var(--verde); }
+.aviso-erro    { border-left-color: var(--magenta); }
+.aviso-alerta  { border-left-color: var(--amarelo); }
+
+/* ---------- Tabelas ---------- */
+.tabela-rolagem { overflow-x: auto; }   /* no celular, a tabela rola para o lado */
+
+table { width: 100%; border-collapse: collapse; }
+
+th, td {
+    padding: 0.625rem 0.75rem;
+    text-align: left;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--borda);
+}
+th { font-weight: 600; background: #eef1f5; }
+th.numero, td.numero { text-align: right; }
+
+/* ---------- Formulários e botões (usados nas próximas etapas) ---------- */
+.formulario label {
+    display: block;
+    margin: 0.75rem 0 0.25rem;
+    font-weight: 600;
+}
+.formulario input,
+.formulario select,
+.formulario textarea {
+    width: 100%;
+    min-height: 44px;
+    padding: 0.5rem 0.75rem;
+    font: inherit;
+    background: var(--branco);
+    border: 1px solid #9aa3b0;
+    border-radius: 6px;
+}
+
+.botao {
+    display: inline-block;
+    min-height: 44px;
+    padding: 0.625rem 1.25rem;
+    font: inherit;
+    font-weight: 600;
+    color: var(--branco);
+    text-decoration: none;
+    background: var(--ciano);
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.botao:hover { background: var(--ciano-escuro); }
+.botao-perigo { background: var(--magenta); }
+.botao-perigo:hover { background: #9c1049; }
+
+/* ---------- Rodapé ---------- */
+.rodape {
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--texto-suave);
+}
+.rodape p { margin: 0; }
+
+/* ---------- Telas maiores (a partir de 768px) ---------- */
+@media (min-width: 768px) {
+    .topo { padding: 0 1.5rem; }
+    .botao-menu { display: none; }
+
+    .menu {
+        display: flex;
+        flex-direction: row;
+        width: auto;
+    }
+    .menu a,
+    .menu .em-breve {
+        padding: 1rem 0.75rem;
+        border-bottom: 3px solid transparent;
+    }
+    .menu a.ativo { border-bottom-color: var(--amarelo); }
+
+    .conteudo { padding-top: 2rem; }
+}
+
+/* ---------- Etapa 2: usuário logado e tela de login ---------- */
+.menu .usuario {
+    display: block;
+    padding: 0.75rem 0.5rem;
+    color: #b9c1cf;
+    border-bottom: 1px solid #2f3747;
+}
+
+.login {
+    max-width: 380px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+.login h1 { text-align: center; }
+.login .botao { width: 100%; margin-top: 1.25rem; }
+
+@media (min-width: 768px) {
+    .menu .usuario {
+        padding: 1rem 0.75rem;
+        border-bottom: 3px solid transparent;
+    }
+}
