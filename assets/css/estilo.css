@@ -220,3 +220,39 @@ th.numero, td.numero { text-align: right; }
         border-bottom: 3px solid transparent;
     }
 }
+
+/* ---------- Etapa 3: funcionários ---------- */
+.botao-secundario {
+    color: var(--ciano-escuro);
+    background: transparent;
+    border: 1px solid var(--ciano-escuro);
+}
+.botao-secundario:hover {
+    color: var(--ciano-escuro);
+    background: #e6f1f8;
+}
+
+.botao-pequeno {
+    padding: 0.375rem 0.875rem;
+    font-size: 0.9rem;
+}
+
+.botoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+
+.acoes {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.acoes form { margin: 0; }
+
+/* Situação sempre com texto, além da cor */
+.situacao-ativo   { color: var(--verde);   font-weight: 600; }
+.situacao-inativo { color: var(--magenta); font-weight: 600; }
+
+.aviso ul { margin: 0.25rem 0 0; padding-left: 1.25rem; }

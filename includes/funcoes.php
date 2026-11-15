@@ -20,3 +20,29 @@ function formatar_data($data) {
 function formatar_data_hora($data) {
     return $data ? date('d/m/Y H:i', strtotime($data)) : '';
 }
+
+// 'gerente' -> "Gerente"; qualquer outro valor -> "Funcionário"
+function nome_do_nivel($nivel) {
+    return $nivel === 'gerente' ? 'Gerente' : 'Funcionário';
+}
+
+// Guarda uma mensagem para aparecer na próxima página (usada depois de salvar e redirecionar).
+// $tipo pode ser: sucesso, erro ou alerta
+function definir_mensagem($tipo, $texto) {
+    $_SESSION['mensagem'] = ['tipo' => $tipo, 'texto' => $texto];
+}
+
+// Mostra a mensagem guardada (se houver) e apaga, para aparecer uma vez só.
+function mostrar_mensagem() {
+    if (empty($_SESSION['mensagem'])) {
+        return;
+    }
+    $m = $_SESSION['mensagem'];
+    unset($_SESSION['mensagem']);
+
+    $rotulos = ['sucesso' => 'Sucesso', 'erro' => 'Erro', 'alerta' => 'Atenção'];
+    $tipo    = isset($rotulos[$m['tipo']]) ? $m['tipo'] : 'alerta';
+
+    echo '<div class="aviso aviso-' . $tipo . '" role="status"><strong>'
+       . $rotulos[$tipo] . ':</strong> ' . e($m['texto']) . '</div>';
+}
