@@ -46,3 +46,31 @@ function mostrar_mensagem() {
     echo '<div class="aviso aviso-' . $tipo . '" role="status"><strong>'
        . $rotulos[$tipo] . ':</strong> ' . e($m['texto']) . '</div>';
 }
+
+// Converte texto digitado em número com centavos. Aceita "12,90", "12.90" e "1.234,50".
+// Devolve null se não for um número válido.
+function para_decimal($texto) {
+    $texto = str_replace(['R$', ' '], '', trim((string) $texto));
+    if (strpos($texto, ',') !== false) {
+        $texto = str_replace('.', '', $texto);    // tira o ponto de milhar
+        $texto = str_replace(',', '.', $texto);   // vírgula vira ponto decimal
+    }
+    return is_numeric($texto) ? round((float) $texto, 2) : null;
+}
+
+// Converte texto em número inteiro entre $min e $max. Devolve null se não for válido.
+function para_inteiro($texto, $min, $max) {
+    $valor = filter_var(trim((string) $texto), FILTER_VALIDATE_INT, ['options' => ['min_range' => $min, 'max_range' => $max]]);
+    return $valor === false ? null : $valor;
+}
+
+// Situação de um material no estoque: devolve [texto, classe do CSS]
+function situacao_estoque($quantidade, $minimo) {
+    if ($quantidade <= 0) {
+        return ['Zerado', 'situacao-inativo'];
+    }
+    if ($quantidade <= $minimo) {
+        return ['Baixo', 'situacao-baixo'];
+    }
+    return ['OK', 'situacao-ativo'];
+}

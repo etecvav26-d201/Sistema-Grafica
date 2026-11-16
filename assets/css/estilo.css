@@ -256,3 +256,12 @@ th.numero, td.numero { text-align: right; }
 .situacao-inativo { color: var(--magenta); font-weight: 600; }
 
 .aviso ul { margin: 0.25rem 0 0; padding-left: 1.25rem; }
+
+/* ---------- Etapa 4: estoque ---------- */
+.situacao-baixo { color: #8a5a00; font-weight: 600; }
+
+.dica {
+    margin: 0.5rem 0 0;
+    font-size: 0.875rem;
+    color: var(--texto-suave);
+}
