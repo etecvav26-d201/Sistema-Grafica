@@ -74,3 +74,13 @@ function situacao_estoque($quantidade, $minimo) {
     }
     return ['OK', 'situacao-ativo'];
 }
+
+// Confere se o texto é uma data real no formato AAAA-MM-DD (o formato dos campos de data).
+// Devolve o próprio texto se for válida, ou '' se não for.
+function data_valida($texto) {
+    $texto = trim((string) $texto);
+    if (!preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $texto, $p)) {
+        return '';
+    }
+    return checkdate((int) $p[2], (int) $p[3], (int) $p[1]) ? $texto : '';
+}
