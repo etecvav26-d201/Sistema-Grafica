@@ -1,6 +1,4 @@
--- Gráfica Escolar – banco de dados (Etapa 1)
--- Como usar: no phpMyAdmin, aba "Importar", escolha este arquivo e clique em "Executar".
--- Pode ser importado de novo sem apagar nada: ele só cria o que ainda não existe.
+-- Banco de Dados - Gráfica Escolar
 
 SET NAMES utf8mb4;
 
@@ -8,7 +6,7 @@ CREATE DATABASE IF NOT EXISTS grafica_escolar
   CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE grafica_escolar;
 
--- ---------- USUÁRIOS ----------
+-- Usuarios
 CREATE TABLE IF NOT EXISTS usuarios (
   id        INT AUTO_INCREMENT PRIMARY KEY,
   nome      VARCHAR(100) NOT NULL,
@@ -19,7 +17,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
   criado_em DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- ---------- PRODUTOS ----------
+-- Produtos
 -- tipo 'material' controla estoque; tipo 'servico' (impressão, encadernação...) só tem preço.
 CREATE TABLE IF NOT EXISTS produtos (
   id             INT AUTO_INCREMENT PRIMARY KEY,
@@ -41,7 +39,7 @@ CREATE TABLE IF NOT EXISTS movimentacoes (
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 ) ENGINE=InnoDB;
 
--- ---------- VENDAS ----------
+-- Vendas
 -- Cada linha é um item vendido (sem carrinho).
 CREATE TABLE IF NOT EXISTS vendas (
   id          INT AUTO_INCREMENT PRIMARY KEY,
@@ -54,7 +52,7 @@ CREATE TABLE IF NOT EXISTS vendas (
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 ) ENGINE=InnoDB;
 
--- ---------- GASTOS ----------
+-- Gastos
 CREATE TABLE IF NOT EXISTS gastos (
   id         INT AUTO_INCREMENT PRIMARY KEY,
   descricao  VARCHAR(150) NOT NULL,
@@ -62,13 +60,12 @@ CREATE TABLE IF NOT EXISTS gastos (
   data_gasto DATE NOT NULL
 ) ENGINE=InnoDB;
 
--- ---------- DADOS INICIAIS (para testar) ----------
--- Dois usuários de teste. Senha dos dois: admin123  (troque depois!)
+-- Dados iniciais para teste, 2 usuarios
 INSERT IGNORE INTO usuarios (nome, login, senha, nivel) VALUES
 ('Gerente de Teste',     'gerente',     '$2b$12$QfAS0Q5Nb3dfwXd2UYcQQ.uTrnR0yIV3m.uNhaSXZYdo5pqqcj7Cq', 'gerente'),
 ('Funcionário de Teste', 'funcionario', '$2b$12$QfAS0Q5Nb3dfwXd2UYcQQ.uTrnR0yIV3m.uNhaSXZYdo5pqqcj7Cq', 'funcionario');
 
--- Serviços e materiais de exemplo. Os preços são inventados: ajuste para os valores reais da gráfica.
+-- Serviços e materiais de exemplo.
 INSERT IGNORE INTO produtos (nome, tipo, preco, quantidade, estoque_minimo) VALUES
 ('Impressão P&B (por página)',       'servico',  0.50, 0, 0),
 ('Impressão colorida (por página)',  'servico',  2.00, 0, 0),

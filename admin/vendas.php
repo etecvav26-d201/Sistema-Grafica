@@ -1,5 +1,4 @@
 <?php
-// Etapa 5: registro de vendas e histórico.
 // Cada venda é um item (produto ou serviço) com a quantidade vendida.
 // Se for material, o estoque diminui automaticamente.
 require_once __DIR__ . '/../includes/auth.php';
@@ -12,7 +11,7 @@ $erros = [];
 // Valores do formulário (podem vir da calculadora de impressão pelo endereço)
 $venda = ['produto_id' => (int) ($_GET['produto'] ?? 0), 'quantidade' => trim($_GET['quantidade'] ?? '')];
 
-// ---------- Registrar venda ----------
+// Registrar venda
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['acao'] ?? '') === 'registrar') {
     $venda['produto_id'] = (int) ($_POST['produto_id'] ?? 0);
     $venda['quantidade'] = trim($_POST['quantidade'] ?? '');
@@ -75,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['acao'] ?? '') === 'registr
     }
 }
 
-// ---------- Produtos e serviços para escolher na venda ----------
+// Produtos e serviços para escolher na venda
 $lista_servicos  = [];
 $lista_materiais = [];
 foreach ($pdo->query('SELECT id, nome, tipo, preco, quantidade FROM produtos ORDER BY nome')->fetchAll() as $p) {
@@ -86,7 +85,7 @@ foreach ($pdo->query('SELECT id, nome, tipo, preco, quantidade FROM produtos ORD
     }
 }
 
-// ---------- Histórico, com filtro opcional por período ----------
+// Histórico, com filtro opcional por período
 $de  = data_valida($_GET['de'] ?? '');
 $ate = data_valida($_GET['ate'] ?? '');
 

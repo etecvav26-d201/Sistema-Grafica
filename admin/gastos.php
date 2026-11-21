@@ -1,5 +1,6 @@
 <?php
-// Etapa 6: gastos da gráfica (compras de materiais e outros custos). Somente o gerente.
+// Somente o gerente possui acesso.
+
 require_once __DIR__ . '/../includes/auth.php';
 exigir_gerente();
 
@@ -13,7 +14,7 @@ $gasto = ['descricao' => '', 'valor' => '', 'data_gasto' => date('Y-m-d')];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $acao = $_POST['acao'] ?? '';
 
-    // ----- Cadastrar gasto -----
+    // Cadastrar gasto
     if ($acao === 'salvar') {
         $gasto['descricao']  = trim($_POST['descricao'] ?? '');
         $gasto['valor']      = trim($_POST['valor'] ?? '');
@@ -40,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // ----- Excluir gasto (para corrigir um lançamento errado) -----
+    // Excluir gasto
     elseif ($acao === 'excluir') {
         $stmt = $pdo->prepare('DELETE FROM gastos WHERE id = ?');
         $stmt->execute([(int) ($_POST['id'] ?? 0)]);
@@ -50,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// ---------- Lista, com filtro opcional por período ----------
+// Lista, com filtro opcional por período
 $de  = data_valida($_GET['de'] ?? '');
 $ate = data_valida($_GET['ate'] ?? '');
 

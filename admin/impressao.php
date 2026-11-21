@@ -1,6 +1,6 @@
 <?php
-// Etapa 5: calculadora do preço de impressão (páginas x preço unitário do serviço).
 // O total aparece na hora pelo JavaScript e também é calculado aqui no servidor.
+
 require_once __DIR__ . '/../includes/auth.php';
 exigir_login();
 

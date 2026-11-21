@@ -19,6 +19,7 @@ $menu = [
     'relatorio.php'    => ['Relatório', true],
 ];
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -27,27 +28,39 @@ $menu = [
     <title><?= e($titulo_pagina) ?> – <?= e(NOME_SISTEMA) ?></title>
     <link rel="stylesheet" href="<?= $raiz ?>assets/css/estilo.css">
 </head>
-<body>
-<div class="faixa-cmyk" aria-hidden="true"></div>
-<header class="topo">
-    <!-- Para usar o logo: troque o texto abaixo por <img src="<?= $raiz ?>logo/logo.png" alt="..."> -->
-    <a class="marca" href="inicio.php"><?= e(NOME_SISTEMA) ?></a>
-    <button type="button" class="botao-menu" id="botao-menu" aria-expanded="false" aria-controls="menu">Menu</button>
-    <nav class="menu" id="menu" aria-label="Menu principal">
-        <?php foreach ($menu as $arquivo => [$texto, $so_gerente]): ?>
-            <?php if ($so_gerente && $nivel !== 'gerente') { continue; } ?>
-            <?php if (file_exists(__DIR__ . '/../admin/' . $arquivo)): ?>
-                <a href="<?= $arquivo ?>"<?= $arquivo === $pagina_atual ? ' class="ativo" aria-current="page"' : '' ?>><?= e($texto) ?></a>
-            <?php else: ?>
-                <span class="em-breve"><?= e($texto) ?> (em breve)</span>
-            <?php endif; ?>
-        <?php endforeach; ?>
 
-        <?php if (!empty($_SESSION['usuario_id'])): ?>
-            <span class="usuario">Olá, <?= e($_SESSION['nome'] ?? '') ?> (<?= $nivel === 'gerente' ? 'gerente' : 'funcionário' ?>)</span>
-            <a href="<?= $raiz ?>logout.php">Sair</a>
-        <?php endif; ?>
-    </nav>
-</header>
-<main class="conteudo">
-    <h1><?= e($titulo_pagina) ?></h1>
+<body>
+    <div class="faixa-cmyk" aria-hidden="true"></div>
+    <header class="topo">
+
+            <?php if (file_exists(__DIR__ . '/../logo/logo.png')): ?>
+                <img class="logo-img" src="<?= $raiz ?>logo/logo.png" alt="<?= e(NOME_SISTEMA) ?>">
+            <?php else: ?>
+                <?= e(NOME_SISTEMA) ?>
+            <?php endif; ?>
+        </a>
+
+        <button 
+            type="button" class="botao-menu" id="botao-menu" aria-expanded="false" aria-controls="menu">Menu
+        </button>
+
+        <nav class="menu" id="menu" aria-label="Menu principal">
+            <?php foreach ($menu as $arquivo => [$texto, $so_gerente]): ?>
+                <?php if ($so_gerente && $nivel !== 'gerente') { continue; } ?>
+                <?php if (file_exists(__DIR__ . '/../admin/' . $arquivo)): ?>
+                    <a href="<?= $arquivo ?>"<?= $arquivo === $pagina_atual ? ' class="ativo" aria-current="page"' : '' ?>><?= e($texto) ?></a>
+                <?php else: ?>
+                    <span class="em-breve"><?= e($texto) ?> (em breve)</span>
+                <?php endif; ?>
+            <?php endforeach; ?>
+
+            <?php if (!empty($_SESSION['usuario_id'])): ?>
+                <span class="usuario">Olá, <?= e($_SESSION['nome'] ?? '') ?> (<?= $nivel === 'gerente' ? 'gerente' : 'funcionário' ?>)</span>
+                <a href="<?= $raiz ?>logout.php">Sair</a>
+            <?php endif; ?>
+        </nav>
+
+    </header>
+    
+    <main class="conteudo">
+        <h1><?= e($titulo_pagina) ?></h1>

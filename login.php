@@ -44,6 +44,7 @@ if (($_GET['aviso'] ?? '') === 'expirou') {
     $aviso = 'Você saiu do sistema.';
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -52,27 +53,29 @@ if (($_GET['aviso'] ?? '') === 'expirou') {
     <title>Entrar – <?= e(NOME_SISTEMA) ?></title>
     <link rel="stylesheet" href="assets/css/estilo.css">
 </head>
+
 <body>
-<div class="faixa-cmyk" aria-hidden="true"></div>
-<main class="login">
-    <h1><?= e(NOME_SISTEMA) ?></h1>
+    <div class="faixa-cmyk" aria-hidden="true"></div>
+    <main class="login">
+        <h1><?= e(NOME_SISTEMA) ?></h1>
 
-    <?php if ($erro !== ''): ?>
-        <div class="aviso aviso-erro" role="alert"><strong>Erro:</strong> <?= e($erro) ?></div>
-    <?php endif; ?>
-    <?php if ($aviso !== ''): ?>
-        <div class="aviso aviso-alerta"><?= e($aviso) ?></div>
-    <?php endif; ?>
+        <?php if ($erro !== ''): ?>
+            <div class="aviso aviso-erro" role="alert"><strong>Erro:</strong> <?= e($erro) ?></div>
+        <?php endif; ?>
+        <?php if ($aviso !== ''): ?>
+            <div class="aviso aviso-alerta"><?= e($aviso) ?></div>
+        <?php endif; ?>
 
-    <form class="cartao formulario" method="post" action="login.php">
-        <label for="login">Usuário</label>
-        <input type="text" id="login" name="login" value="<?= e($login) ?>" autocomplete="username" required autofocus>
+        <form class="cartao formulario" method="post" action="login.php">
+            <label for="login">Usuário</label>
+            <input type="text" id="login" name="login" value="<?= e($login) ?>" autocomplete="username" required autofocus>
 
-        <label for="senha">Senha</label>
-        <input type="password" id="senha" name="senha" autocomplete="current-password" required>
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" autocomplete="current-password" required>
 
-        <button type="submit" class="botao">Entrar</button>
-    </form>
-</main>
+            <button type="submit" class="botao">Entrar</button>
+        </form>
+    </main>
+
 </body>
 </html>

@@ -1,6 +1,7 @@
 <?php
-// Etapa 3: cadastro de funcionários (somente o gerente).
-// Esta página lista, cadastra, edita e ativa/desativa. Funcionário nunca é apagado.
+// Somente gerente.
+// Esta página lista, cadastra, edita e ativa/desativa.
+
 require_once __DIR__ . '/../includes/auth.php';
 exigir_gerente();
 
@@ -12,11 +13,11 @@ $meu_id = (int) $_SESSION['usuario_id'];
 // Valores que aparecem no formulário (vazio = novo funcionário)
 $form = ['id' => 0, 'nome' => '', 'login' => '', 'nivel' => 'funcionario'];
 
-// ---------- Quando um formulário é enviado ----------
+// Quando um formulário é enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $acao = $_POST['acao'] ?? '';
 
-    // ----- Salvar: cadastrar (id = 0) ou editar (id maior que 0) -----
+    // Salvar: cadastrar (id = 0) ou editar (id maior que 0)
     if ($acao === 'salvar') {
         $form['id']    = (int) ($_POST['id'] ?? 0);
         $form['nome']  = trim($_POST['nome'] ?? '');
@@ -81,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // ----- Ativar ou desativar -----
+    // Ativar ou desativar
     elseif ($acao === 'status') {
         $id    = (int) ($_POST['id'] ?? 0);
         $ativo = !empty($_POST['ativo']) ? 1 : 0;
@@ -98,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// ---------- Clicou em "Editar": carrega os dados no formulário ----------
+// Clicou em "Editar": carrega os dados no formulário
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' && isset($_GET['editar'])) {
     $stmt = $pdo->prepare('SELECT id, nome, login, nivel FROM usuarios WHERE id = ?');
     $stmt->execute([(int) $_GET['editar']]);
@@ -114,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' && isset($_GET['editar'])) {
     }
 }
 
-// ---------- Lista de funcionários ----------
+// Lista de funcionários
 $funcionarios = $pdo->query(
     'SELECT id, nome, login, nivel, ativo, criado_em FROM usuarios ORDER BY ativo DESC, nome'
 )->fetchAll();

@@ -1,7 +1,7 @@
 <?php
-// Etapa 4: estoque de materiais e cadastro de produtos e serviços.
 // Todo usuário logado consulta e movimenta o estoque.
 // Só o gerente cadastra e edita produtos e preços.
+
 require_once __DIR__ . '/../includes/auth.php';
 exigir_login();
 
@@ -16,11 +16,11 @@ $erros_prod = [];
 $mov  = ['produto_id' => (int) ($_GET['produto'] ?? 0), 'tipo' => 'entrada', 'quantidade' => ''];
 $prod = ['id' => 0, 'nome' => '', 'tipo' => 'material', 'preco' => '', 'quantidade' => '0', 'estoque_minimo' => '0'];
 
-// ---------- Quando um formulário é enviado ----------
+// Quando um formulário é enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $acao = $_POST['acao'] ?? '';
 
-    // ----- Entrada ou saída de estoque -----
+    // Entrada ou saída de estoque
     if ($acao === 'movimentar') {
         $mov['produto_id'] = (int) ($_POST['produto_id'] ?? 0);
         $mov['tipo']       = $_POST['tipo'] ?? '';
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // ----- Cadastrar ou editar produto (somente o gerente) -----
+    // Cadastrar ou editar produto (somente o gerente)
     elseif ($acao === 'salvar_produto') {
         if (!$eh_gerente) {
             definir_mensagem('erro', 'Só o gerente pode cadastrar ou editar produtos.');
@@ -167,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// ---------- Clicou em "Editar": carrega o produto no formulário ----------
+// Clicou em "Editar": carrega o produto no formulário
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' && $eh_gerente && isset($_GET['editar'])) {
     $stmt = $pdo->prepare('SELECT id, nome, tipo, preco, quantidade, estoque_minimo FROM produtos WHERE id = ?');
     $stmt->execute([(int) $_GET['editar']]);
@@ -189,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' && $eh_gerente && isset($_GET['editar'
     }
 }
 
-// ---------- Dados para as listas ----------
+// Dados para as listas
 $materiais = $pdo->query("SELECT id, nome, preco, quantidade, estoque_minimo FROM produtos WHERE tipo = 'material' ORDER BY nome")->fetchAll();
 $servicos  = $pdo->query("SELECT id, nome, preco FROM produtos WHERE tipo = 'servico' ORDER BY nome")->fetchAll();
 

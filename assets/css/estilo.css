@@ -1,13 +1,12 @@
 /* Gráfica Escolar – estilo base (Etapa 1)
-   As cores vêm das tintas de impressão: ciano, magenta, amarelo e preto. */
+   As cores seguem a identidade da Etec: cinza escuro, vermelho e branco. */
 
 :root {
-    --tinta: #1e2430;
-    --papel: #f5f6f8;
+    --tinta: #171d28;
+    --papel: #f0f0f5;
     --branco: #ffffff;
-    --ciano: #0a78b5;
-    --ciano-escuro: #075d8c;
-    --magenta: #c2185b;
+    --vermelho: #d11a2a;
+    --vermelho-escuro: #a9121f;
     --verde: #1b7f4b;
     --amarelo: #f2b705;
     --borda: #d9dde3;
@@ -25,17 +24,17 @@ body {
     background: var(--papel);
 }
 
-a { color: var(--ciano); }
+a { color: var(--vermelho); }
 
 :focus-visible {
-    outline: 3px solid var(--ciano-escuro);
+    outline: 3px solid var(--vermelho-escuro);
     outline-offset: 2px;
 }
 
 /* Faixa das quatro cores no alto da página */
 .faixa-cmyk {
     height: 6px;
-    background: linear-gradient(90deg, #00a0dc 0 25%, #e4007c 25% 50%, #ffd500 50% 75%, #000000 75% 100%);
+    background: var(--vermelho);
 }
 
 /* ---------- Topo e menu (celular primeiro) ---------- */
@@ -117,7 +116,7 @@ h2 { margin: 0 0 0.75rem; font-size: 1.2rem; }
     border-radius: 6px;
 }
 .aviso-sucesso { border-left-color: var(--verde); }
-.aviso-erro    { border-left-color: var(--magenta); }
+.aviso-erro    { border-left-color: var(--vermelho); }
 .aviso-alerta  { border-left-color: var(--amarelo); }
 
 /* ---------- Tabelas ---------- */
@@ -160,14 +159,14 @@ th.numero, td.numero { text-align: right; }
     font-weight: 600;
     color: var(--branco);
     text-decoration: none;
-    background: var(--ciano);
+    background: var(--vermelho);
     border: 0;
     border-radius: 6px;
     cursor: pointer;
 }
-.botao:hover { background: var(--ciano-escuro); }
-.botao-perigo { background: var(--magenta); }
-.botao-perigo:hover { background: #9c1049; }
+.botao:hover { background: var(--vermelho-escuro); }
+.botao-perigo { background: var(--vermelho-escuro); border-color: var(--vermelho-escuro); }
+.botao-perigo:hover { background: #7f0f18; border-color: #7f0f18; }
 
 /* ---------- Rodapé ---------- */
 .rodape {
@@ -193,7 +192,7 @@ th.numero, td.numero { text-align: right; }
         padding: 1rem 0.75rem;
         border-bottom: 3px solid transparent;
     }
-    .menu a.ativo { border-bottom-color: var(--amarelo); }
+    .menu a.ativo { border-bottom-color: var(--vermelho); }
 
     .conteudo { padding-top: 2rem; }
 }
@@ -223,13 +222,13 @@ th.numero, td.numero { text-align: right; }
 
 /* ---------- Etapa 3: funcionários ---------- */
 .botao-secundario {
-    color: var(--ciano-escuro);
+    color: var(--vermelho-escuro);
     background: transparent;
-    border: 1px solid var(--ciano-escuro);
+    border: 1px solid var(--vermelho-escuro);
 }
 .botao-secundario:hover {
-    color: var(--ciano-escuro);
-    background: #e6f1f8;
+    color: var(--vermelho-escuro);
+    background: #fdeeef;
 }
 
 .botao-pequeno {
@@ -253,7 +252,7 @@ th.numero, td.numero { text-align: right; }
 
 /* Situação sempre com texto, além da cor */
 .situacao-ativo   { color: var(--verde);   font-weight: 600; }
-.situacao-inativo { color: var(--magenta); font-weight: 600; }
+.situacao-inativo { color: var(--vermelho); font-weight: 600; }
 
 .aviso ul { margin: 0.25rem 0 0; padding-left: 1.25rem; }
 
@@ -277,8 +276,8 @@ th.numero, td.numero { text-align: right; }
     gap: 0.5rem;
     margin-top: 1.25rem;
     padding: 0.75rem 1rem;
-    background: #eaf4fa;
-    border-left: 5px solid var(--ciano);
+    background: #fdeeef;
+    border-left: 5px solid var(--vermelho);
     border-radius: 6px;
 }
 .total-destaque { font-size: 1.5rem; }
@@ -291,3 +290,7 @@ th.numero, td.numero { text-align: right; }
 .linha-campos > div { flex: 1 1 160px; }
 
 .resumo { margin: 1rem 0 0.75rem; }
+
+/* ---------- Logo no topo (arquivo logo/logo.png) ---------- */
+.marca { display: inline-flex; align-items: center; }
+.logo-img { display: block; height: 74px; width: auto; }
