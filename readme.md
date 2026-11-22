@@ -10,6 +10,8 @@
 **2°D**
 
 ## Autores
+- **Alex dos Santos Apolinario**
+- **Ana Carolina Bernal Santos**
 - **Arthur Alexandre Dias Silva**
 - **Helena Bianquini Carriço**
 
